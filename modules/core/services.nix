@@ -7,7 +7,7 @@
     gvfs.enable = true; # For Mounting USB & More
     power-profiles-daemon.enable = true;
     openssh = {
-      enable = true; # Enable SSH
+      enable = false; # Enable SSH
       settings = {
         PermitRootLogin = "no"; # Prevent root from SSH login
         PasswordAuthentication = true; #Users can SSH using kb and password
