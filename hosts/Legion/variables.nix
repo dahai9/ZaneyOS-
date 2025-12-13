@@ -9,6 +9,8 @@
   # SDDM background is set with stylixImage
   displayManager = "sddm";
 
+  # Timezone Configuration
+  timeZone = "Asia/Shanghai";
   # Emable/disable bundled applications
   tmuxEnable = false;
   alacrittyEnable = false;
@@ -61,14 +63,14 @@
   nvidiaID = "PCI:1:0:0";
 
   # Enable NFS
-  enableNFS = true;
+  enableNFS = false;
 
   # Enable Printing Support
-  printEnable = false;
+  printEnable = true;
 
   # Enable Thunar GUI File Manager
   # Yazi is default File Manager
-  thunarEnable = false;
+  thunarEnable = true;
 
   # Themes, waybar and animation.
   #  Only uncomment your selection

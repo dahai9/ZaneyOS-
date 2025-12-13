@@ -25,7 +25,7 @@ in {
 
   config = mkIf cfg.enable {
     # Enforce kernel 6.12 when this hybrid config is selected
-    boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_12;
+    #boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_12;
 
     services.xserver.videoDrivers = ["nvidia"];
 

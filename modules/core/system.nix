@@ -1,6 +1,11 @@
-{host, ...}: let
+{
+  host,
+  pkgs,
+  ...
+}: let
   vars = import ../../hosts/${host}/variables.nix;
   consoleKeyMap = vars.consoleKeyMap or "us";
+  timeZone = vars.timeZone or "America/New_York";
 in {
   nix = {
     settings = {
@@ -14,8 +19,19 @@ in {
       trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
     };
   };
-  time.timeZone = "America/New_York";
+  time.timeZone = "${timeZone}";
   i18n.defaultLocale = "en_US.UTF-8";
+  i18n.inputMethod = {
+    type = "fcitx5";
+    enable = true;
+    fcitx5.addons = with pkgs; [
+      fcitx5-gtk # alternatively,
+      kdePackages.fcitx5-qt
+      qt6Packages.fcitx5-chinese-addons # table input method support
+      fcitx5-nord # a color theme
+      fcitx5-rime
+    ];
+  };
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
     LC_IDENTIFICATION = "en_US.UTF-8";

@@ -3,6 +3,7 @@
   config,
   pkgs,
   lib,
+  username,
   ...
 }: let
   vars = import ../../../hosts/${host}/variables.nix;
@@ -194,8 +195,9 @@ in {
     };
 
     extraConfig = "
-      monitor=,preferred,auto,auto
-      monitor=Virtual-1,1920x1080@60,auto,1
+      # monitor=,preferred,auto,auto
+      # monitor=Virtual-1,1920x1080@60,auto,1
+      source = $HOME/.config/hypr/monitors.conf
       ${extraMonitorSettings}
       # To enable blur on waybar uncomment the line below
       # Thanks to SchotjeChrisman

@@ -1,6 +1,7 @@
 {
   pkgs,
   host,
+  profile,
   ...
 }: let
   vars = import ../../hosts/${host}/variables.nix;
