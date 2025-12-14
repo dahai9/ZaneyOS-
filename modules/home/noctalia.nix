@@ -11,7 +11,7 @@
 in {
   # Install the Noctalia package for this user (CLI, assets, etc.)
   home.packages = [
-    noctaliaPath
+    pkgs.noctalia-shell
   ];
 
   # Seed the Noctalia QuickShell shell code into ~/.config/quickshell/noctalia-shell
@@ -28,3 +28,5 @@ in {
     fi
   '';
 }
+# TODO: write a rust json to nix converter to syning noctalia gui settings using nix
+

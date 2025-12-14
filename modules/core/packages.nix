@@ -21,10 +21,13 @@ in {
       enable = true;
       defaultEditor = true;
     };
-    firefox.enable = false; # Firefox is not installed by default
+    firefox.enable = false; # Firefox is not installed by default TODO:
     hyprland = {
       enable = true; # set this so desktop file is created
       withUWSM = false;
+    };
+    niri = {
+      enable = true;
     };
     dconf.enable = true;
     seahorse.enable = true;

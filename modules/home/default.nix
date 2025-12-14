@@ -37,7 +37,6 @@ in {
       ./cli/git.nix
       ./gtk.nix
       ./cli/htop.nix
-      ./hyprland
       ./terminals/kitty.nix
       ./cli/lazygit.nix
       ./obs-studio.nix
@@ -60,6 +59,10 @@ in {
       ./zen-browser.nix
       ./zoxide.nix
       ./zsh
+    ]
+    ++ [
+      ./hyprland
+      ./niri
     ]
     ++ (
       if helixEnable
