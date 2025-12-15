@@ -95,7 +95,7 @@ in ''
       // === Application Launchers ===
       Mod+T { spawn "${terminal}"; }
       Mod+Return { spawn "${terminal}"; }
-      Mod+Y { spawn "fuzzel"; }
+      Mod+Y { spawn "yazi"; }
       Mod+D { spawn ${launcherCommand}; }
 
       ${noctaliaKeybinds}
@@ -147,10 +147,6 @@ in ''
       Mod+Down  { focus-window-down; }
       Mod+Up    { focus-window-up; }
       Mod+Right { focus-column-right; }
-      Mod+H     { focus-column-left; }
-      Mod+J     { focus-window-down; }
-      Mod+K     { focus-window-up; }
-      Mod+L     { focus-column-right; }
 
       // === Window Movement ===
       Mod+Shift+Left  { move-column-left; }
@@ -201,18 +197,21 @@ in ''
       Mod+Shift+I         { move-workspace-up; }
 
       // === Mouse Wheel Navigation ===
-      Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
-      Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
+      Mod+Shift+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
+      Mod+Shift+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
       Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
       Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
+
+      Mod+MouseBack  { focus-workspace-down; }
+      Mod+MouseForward    { focus-workspace-up; }
 
       Mod+WheelScrollRight      { focus-column-right; }
       Mod+WheelScrollLeft       { focus-column-left; }
       Mod+Ctrl+WheelScrollRight { move-column-right; }
       Mod+Ctrl+WheelScrollLeft  { move-column-left; }
 
-      Mod+Shift+WheelScrollDown      { focus-column-right; }
-      Mod+Shift+WheelScrollUp        { focus-column-left; }
+      Mod+WheelScrollDown      { focus-column-right; }
+      Mod+WheelScrollUp        { focus-column-left; }
       Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
       Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
 

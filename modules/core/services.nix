@@ -1,4 +1,9 @@
-{profile, ...}: {
+{
+  profile,
+  pkgs,
+  lib,
+  ...
+}: {
   # Services to start
   services = {
     upower.enable = true; # noctalia shell battery
@@ -54,6 +59,48 @@
           }
         ];
       };
+    };
+    mihomo = {
+      enable = true;
+      configFile = "/home/dahai003/.config/mihomo/config.json";
+      webui = pkgs.metacubexd;
+    };
+    usbmuxd.enable = true; # iPhone support
+  };
+  users.users.usbmux.extraGroups = ["docker"];
+  systemd.services.mihomo = {
+    wantedBy = lib.mkForce []; # disable auto start
+  };
+  systemd.services.rclone-onedrive-mount = {
+    description = "Service that connects to Google Drive";
+    after = ["network-online.target"];
+    requires = ["network-online.target"];
+
+    serviceConfig = let
+      riveDir = "/home/Onedrive"; # 你的Google Drive挂载目录
+    in {
+      Type = "simple";
+      ExecStartPre = "/run/current-system/sw/bin/mkdir -p ${riveDir}";
+      ExecStart = "${pkgs.rclone}/bin/rclone mount --vfs-cache-mode full Onedrive: ${riveDir} --vfs-cache-max-size 15G --allow-other";
+      ExecStop = "/run/current-system/sw/bin/fusermount -u ${riveDir}";
+      Environment = ["PATH=/run/wrappers/bin/:$PATH"];
+      User = "dahai003";
+    };
+  };
+  systemd.services.rclone-sync-mount = {
+    description = "Service that connects to Google Drive";
+    after = ["network-online.target"];
+    requires = ["network-online.target"];
+
+    serviceConfig = let
+      riveDir = "/home/Sync"; # 你的Google Drive挂载目录
+    in {
+      Type = "simple";
+      ExecStartPre = "/run/current-system/sw/bin/mkdir -p ${riveDir}";
+      ExecStart = "${pkgs.rclone}/bin/rclone mount --vfs-cache-mode full Sync: ${riveDir} --vfs-cache-max-size 15G --allow-other";
+      ExecStop = "/run/current-system/sw/bin/fusermount -u ${riveDir}";
+      Environment = ["PATH=/run/wrappers/bin/:$PATH"];
+      User = "dahai003";
     };
   };
 }

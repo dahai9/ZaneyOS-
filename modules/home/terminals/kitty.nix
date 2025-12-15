@@ -72,4 +72,15 @@
       map ctrl+shift+backspace restore_font_size
     '';
   };
+
+  # home.file.".local/share/applications/kitty.desktop".text = ''
+  #   [Desktop Entry]
+  #   Name=Kitty
+  #   Comment=Fast, feature-rich, GPU-based terminal
+  #   Exec=kitty
+  #   Icon=kitty
+  #   Type=Application
+  #   Categories=TerminalEmulator;
+  #   StartupNotify=true
+  # ''; # 这里只是最小示例，真实条目可参考系统自带的 kitty.desktop 再加 Categories
 }

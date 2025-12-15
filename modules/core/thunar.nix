@@ -9,6 +9,7 @@ in {
     thunar = {
       enable = thunarEnable;
       plugins = with pkgs.xfce; [
+        exo
         thunar-archive-plugin
         thunar-volman
       ];

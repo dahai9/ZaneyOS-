@@ -82,12 +82,13 @@ in {
           ++ hyprlsExts
           ++ neroHyprlandExts
           ++ codeRunnerExts;
-        userSettings = lib.mkForce {
-          "workbench.colorTheme" = "Nero Hyprland";
-          "workbench.iconTheme" = "catppuccin-mocha";
-        };
+        # userSettings = lib.mkForce {
+        #   "workbench.colorTheme" = "Nero Hyprland";
+        #   "workbench.iconTheme" = "catppuccin-mocha";
+        # };
       };
     };
   };
+
   nixpkgs.config.allowUnfree = true;
 }
