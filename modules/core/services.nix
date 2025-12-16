@@ -2,8 +2,11 @@
   profile,
   pkgs,
   lib,
+  username,
   ...
-}: {
+}:
+{
+
   # Services to start
   services = {
     upower.enable = true; # noctalia shell battery
@@ -15,20 +18,17 @@
       enable = false; # Enable SSH
       settings = {
         PermitRootLogin = "no"; # Prevent root from SSH login
-        PasswordAuthentication = true; #Users can SSH using kb and password
+        PasswordAuthentication = true; # Users can SSH using kb and password
         KbdInteractiveAuthentication = true;
       };
-      ports = [22];
+      ports = [ 22 ];
     };
     blueman.enable = true; # Bluetooth Support
     tumbler.enable = true; # Image/video preview
     gnome.gnome-keyring.enable = true;
 
     smartd = {
-      enable =
-        if profile == "vm"
-        then false
-        else true;
+      enable = if profile == "vm" then false else true;
       autodetect = true;
     };
     pipewire = {
@@ -60,47 +60,60 @@
         ];
       };
     };
+
+    resolved = {
+      enable = true;
+      dnssec = "false"; # for mihomo work properly
+      #domains = [ "~." ];
+      #fallbackDns = [ "1.1.1.1" "1.0.0.1" ];
+      dnsovertls = "false";
+    };
     mihomo = {
       enable = true;
-      configFile = "/home/dahai003/.config/mihomo/config.json";
+      configFile = "/home/${username}/.config/mihomo/config.yaml";
+      tunMode = true;
       webui = pkgs.metacubexd;
     };
     usbmuxd.enable = true; # iPhone support
   };
-  users.users.usbmux.extraGroups = ["docker"];
+  users.users.usbmux.extraGroups = [ "docker" ];
   systemd.services.mihomo = {
-    wantedBy = lib.mkForce []; # disable auto start
+    wantedBy = lib.mkForce [ ]; # disable auto start
   };
   systemd.services.rclone-onedrive-mount = {
     description = "Service that connects to Google Drive";
-    after = ["network-online.target"];
-    requires = ["network-online.target"];
+    after = [ "network-online.target" ];
+    requires = [ "network-online.target" ];
 
-    serviceConfig = let
-      riveDir = "/home/Onedrive"; # 你的Google Drive挂载目录
-    in {
-      Type = "simple";
-      ExecStartPre = "/run/current-system/sw/bin/mkdir -p ${riveDir}";
-      ExecStart = "${pkgs.rclone}/bin/rclone mount --vfs-cache-mode full Onedrive: ${riveDir} --vfs-cache-max-size 15G --allow-other";
-      ExecStop = "/run/current-system/sw/bin/fusermount -u ${riveDir}";
-      Environment = ["PATH=/run/wrappers/bin/:$PATH"];
-      User = "dahai003";
-    };
+    serviceConfig =
+      let
+        riveDir = "/home/Onedrive"; # 你的Google Drive挂载目录
+      in
+      {
+        Type = "simple";
+        ExecStartPre = "/run/current-system/sw/bin/mkdir -p ${riveDir}";
+        ExecStart = "${pkgs.rclone}/bin/rclone mount --vfs-cache-mode full Onedrive: ${riveDir} --vfs-cache-max-size 15G --allow-other";
+        ExecStop = "/run/current-system/sw/bin/fusermount -u ${riveDir}";
+        Environment = [ "PATH=/run/wrappers/bin/:$PATH" ];
+        User = "dahai003";
+      };
   };
   systemd.services.rclone-sync-mount = {
     description = "Service that connects to Google Drive";
-    after = ["network-online.target"];
-    requires = ["network-online.target"];
+    after = [ "network-online.target" ];
+    requires = [ "network-online.target" ];
 
-    serviceConfig = let
-      riveDir = "/home/Sync"; # 你的Google Drive挂载目录
-    in {
-      Type = "simple";
-      ExecStartPre = "/run/current-system/sw/bin/mkdir -p ${riveDir}";
-      ExecStart = "${pkgs.rclone}/bin/rclone mount --vfs-cache-mode full Sync: ${riveDir} --vfs-cache-max-size 15G --allow-other";
-      ExecStop = "/run/current-system/sw/bin/fusermount -u ${riveDir}";
-      Environment = ["PATH=/run/wrappers/bin/:$PATH"];
-      User = "dahai003";
-    };
+    serviceConfig =
+      let
+        riveDir = "/home/Sync"; # 你的Google Drive挂载目录
+      in
+      {
+        Type = "simple";
+        ExecStartPre = "/run/current-system/sw/bin/mkdir -p ${riveDir}";
+        ExecStart = "${pkgs.rclone}/bin/rclone mount --vfs-cache-mode full Sync: ${riveDir} --vfs-cache-max-size 15G --allow-other";
+        ExecStop = "/run/current-system/sw/bin/fusermount -u ${riveDir}";
+        Environment = [ "PATH=/run/wrappers/bin/:$PATH" ];
+        User = "dahai003";
+      };
   };
 }

@@ -11,9 +11,12 @@
       termius
       gparted
       telegram-desktop
+      rclone
     ])
     ++ (with unstable-pkgs; [
       vscode
+      qq
+      wechat
     ]);
   environment.shells = [
     pkgs.bash
