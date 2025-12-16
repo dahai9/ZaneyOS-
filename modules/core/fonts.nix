@@ -1,6 +1,9 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   fonts = {
     packages = with pkgs; [
+      PingFang
+      SF-Pro
       dejavu_fonts
       fira-code
       fira-code-symbols
@@ -14,6 +17,8 @@
       minecraftia
       nerd-fonts.im-writing
       nerd-fonts.blex-mono
+      nerd-fonts.fira-code
+      nerd-fonts.fantasque-sans-mono
       noto-fonts
       noto-fonts-color-emoji
       noto-fonts-cjk-sans
@@ -24,6 +29,7 @@
       roboto-mono
       symbola
       terminus_font
+
     ];
   };
 }

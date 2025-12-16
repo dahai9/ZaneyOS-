@@ -25,15 +25,28 @@ in {
 
   config = mkIf cfg.enable {
     # Enforce kernel 6.12 when this hybrid config is selected
-    #boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_12;
+    # boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_12;
 
     services.xserver.videoDrivers = ["nvidia"];
-
+    # uncomment it if have graphics problems
+    # hardware.graphics = {
+    #   enable = true;
+    #   enable32Bit = true;
+    #   extraPackages = with pkgs; [
+    #     libva-vdpau-driver
+    #     libvdpau
+    #     libvdpau-va-gl
+    #     nvidia-vaapi-driver
+    #     vdpauinfo
+    #     libva
+    #     libva-utils
+    #   ];
+    # };
     hardware.nvidia = {
       modesetting.enable = true;
       open = true; # RTX 50xx requires the open kernel module
       nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.production;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
 
       # Helpful on laptops to power down the dGPU when idle
       powerManagement.enable = true;

@@ -16,5 +16,5 @@ in ''
   ${barStartupCommand}
   spawn-at-startup "bash" "-c" "swww-daemon && sleep 1 && swww img '${stylixImage}'"
   spawn-at-startup "wal" "-R"
-  spawn-at-startup "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1"
+  spawn-at-startup "systemctl" "--user" "start" "hyprpolkitagent"
 ''

@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/release-25.11";
-
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,44 +40,54 @@
     };
   };
 
-  outputs = {
-    nixpkgs,
-    home-manager,
-    nixvim,
-    nix-flatpak,
-    alejandra,
-    ...
-  } @ inputs: let
-    system = "x86_64-linux";
-    host = "Legion";
-    profile = "amd-hybrid";
-    username = "dahai003";
-    # Deduplicate nixosConfigurations while preserving the top-level 'profile'
-    mkNixosConfig = gpuProfile:
-      nixpkgs.lib.nixosSystem {
+  outputs =
+    {
+      nixpkgs,
+      home-manager,
+      nixvim,
+      nix-flatpak,
+      alejandra,
+      ...
+    }@inputs:
+    let
+      system = "x86_64-linux";
+      host = "Legion";
+      profile = "amd-hybrid";
+      username = "dahai003";
+      unstable-pkgs = import inputs.nixpkgs-unstable {
         inherit system;
-        specialArgs = {
-          inherit inputs;
-          inherit username;
-          inherit host;
-          inherit profile; # keep using the let-bound profile for modules/scripts
-        };
-        modules = [
-          ./modules/core/overlays.nix
-          ./profiles/${gpuProfile}
-          nix-flatpak.nixosModules.nix-flatpak
-        ];
+        config.allowUnfree = true;
       };
-  in {
-    nixosConfigurations = {
-      amd = mkNixosConfig "amd";
-      nvidia = mkNixosConfig "nvidia";
-      nvidia-laptop = mkNixosConfig "nvidia-laptop";
-      amd-hybrid = mkNixosConfig "amd-hybrid";
-      intel = mkNixosConfig "intel";
-      vm = mkNixosConfig "vm";
-    };
 
-    formatter.x86_64-linux = inputs.alejandra.packages.x86_64-linux.default;
-  };
+      # Deduplicate nixosConfigurations while preserving the top-level 'profile'
+      mkNixosConfig =
+        gpuProfile:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit inputs;
+            inherit username;
+            inherit host;
+            inherit profile; # keep using the let-bound profile for modules/scripts
+            inherit unstable-pkgs;
+          };
+          modules = [
+            ./modules/core/overlays.nix
+            ./profiles/${gpuProfile}
+            nix-flatpak.nixosModules.nix-flatpak
+          ];
+        };
+    in
+    {
+      nixosConfigurations = {
+        amd = mkNixosConfig "amd";
+        nvidia = mkNixosConfig "nvidia";
+        nvidia-laptop = mkNixosConfig "nvidia-laptop";
+        amd-hybrid = mkNixosConfig "amd-hybrid";
+        intel = mkNixosConfig "intel";
+        vm = mkNixosConfig "vm";
+      };
+
+      formatter.x86_64-linux = inputs.alejandra.packages.x86_64-linux.default;
+    };
 }
