@@ -10,7 +10,9 @@
   # Services to start
   services = {
     upower.enable = true; # noctalia shell battery
-    libinput.enable = true; # Input Handling
+    libinput={
+      enable = true; # Input Handling
+    };
     fstrim.enable = true; # SSD Optimizer
     gvfs.enable = true; # For Mounting USB & More
     power-profiles-daemon.enable = true;

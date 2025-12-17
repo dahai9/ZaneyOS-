@@ -19,6 +19,8 @@
       touchpad {
           // Natural scrolling inverts scroll direction
           // Up swipe scrolls down, down swipe scrolls up (natural direction)
+          tap
+          click-method "clickfinger"
           natural-scroll
       }
       mouse {
@@ -28,7 +30,8 @@
       trackpoint {
       }
 
-      focus-follows-mouse
+      //focus-follows-mouse
+      workspace-auto-back-and-forth
       warp-mouse-to-focus
   }
 
