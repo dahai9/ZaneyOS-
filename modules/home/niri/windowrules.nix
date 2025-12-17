@@ -44,7 +44,11 @@
       opacity 0.98
       default-column-width { proportion 0.75; }
   }
-
+  // vscode settings
+  window-rule {
+    match app-id=r#"^code$"#
+    default-column-width { proportion 1.0; }
+  }
   // Web apps and Steam opacity
   window-rule {
       match app-id=r#"^(steam|chrome-app\.restream\.io__home-Default|chrome-claude\.ai__new-Default|chrome-github\.com__-Default|chrome-gitlab\.com__theblackdon_black-don-os-Default|chrome-mail\.proton\.me__u_0_inbox-Default|chrome-meet\.google\.com__-Default|chrome-messages\.google\.com__web_u_1_conversations-Default|chrome-web\.descript\.com__-Default)$"#
