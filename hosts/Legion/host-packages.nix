@@ -18,6 +18,8 @@
       vscode
       qq
       wechat
+      # rust toolchain
+      rustup
     ]);
   environment.shells = [
     pkgs.bash
