@@ -29,19 +29,19 @@ in {
 
     services.xserver.videoDrivers = ["nvidia"];
     # uncomment it if have graphics problems
-    # hardware.graphics = {
-    #   enable = true;
-    #   enable32Bit = true;
-    #   extraPackages = with pkgs; [
-    #     libva-vdpau-driver
-    #     libvdpau
-    #     libvdpau-va-gl
-    #     nvidia-vaapi-driver
-    #     vdpauinfo
-    #     libva
-    #     libva-utils
-    #   ];
-    # };
+    hardware.graphics = {
+      enable = true;
+      enable32Bit = true;
+      extraPackages = with pkgs; [
+        libva-vdpau-driver
+        libvdpau
+        libvdpau-va-gl
+        nvidia-vaapi-driver
+        vdpauinfo
+        libva
+        libva-utils
+      ];
+    };
     hardware.nvidia = {
       modesetting.enable = true;
       open = true; # RTX 50xx requires the open kernel module

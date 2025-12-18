@@ -12,6 +12,7 @@
       gparted
       telegram-desktop
       rclone
+      inetutils #for telnet
     ])
     ++ (with unstable-pkgs; [
       vscode
