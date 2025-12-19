@@ -58,7 +58,7 @@ in {
       ./yazi
       ./zen-browser.nix
       ./zoxide.nix
-      ./zsh
+      # ./zsh # use system shell instead of zsh managed by home manager
       ./mpv.nix
     ]
     ++ [

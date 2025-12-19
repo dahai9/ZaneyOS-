@@ -12,7 +12,7 @@
       gparted
       telegram-desktop
       rclone
-      inetutils #for telnet
+      inetutils # for telnet
     ])
     ++ (with unstable-pkgs; [
       vscode
@@ -21,8 +21,5 @@
       # rust toolchain
       rustup
     ]);
-  environment.shells = [
-    pkgs.bash
-    pkgs.zsh
-  ];
+
 }

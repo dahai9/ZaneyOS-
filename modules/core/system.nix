@@ -48,6 +48,8 @@ in {
     ZANEYOS_VERSION = "2.5.5";
     ZANEYOS = "true";
   };
+  # to your system configuration to get completion for system packages (e.g. systemd).
+  environment.pathsToLink = [ "/share/zsh" ]; 
   console.keyMap = "${consoleKeyMap}";
   system.stateVersion = "25.11"; # Do not change!
 }
