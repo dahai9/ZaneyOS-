@@ -49,6 +49,18 @@
     match app-id=r#"^code$"#
     default-column-width { proportion 1.0; }
   }
+  // mpv settings
+
+    window-rule {
+        match app-id="^mpv$"
+
+        // 强制以悬浮模式打开
+        open-floating true
+
+        //（可选）设置悬浮窗口的默认位置：居中
+        // default-floating-position x=50% y=50% relative-to="center"
+    }
+
   // Web apps and Steam opacity
   window-rule {
       match app-id=r#"^(steam|chrome-app\.restream\.io__home-Default|chrome-claude\.ai__new-Default|chrome-github\.com__-Default|chrome-gitlab\.com__theblackdon_black-don-os-Default|chrome-mail\.proton\.me__u_0_inbox-Default|chrome-meet\.google\.com__-Default|chrome-messages\.google\.com__web_u_1_conversations-Default|chrome-web\.descript\.com__-Default)$"#
