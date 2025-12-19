@@ -100,7 +100,6 @@ in
       // === Application Launchers ===
       Mod+T { spawn "${terminal}"; }
       Mod+Return { spawn "${terminal}"; }
-      Mod+Y { spawn "yazi"; }
       Mod+D { spawn ${launcherCommand}; }
 
       ${noctaliaKeybinds}
@@ -294,7 +293,7 @@ in
       Mod+E { spawn "thunar"; }
       Ctrl+Mod+V { spawn "virt-manager"; }
       Ctrl+Mod+E { spawn "emopicker9000"; }
-      Mod+Y { spawn "${terminal} -e yazi"; }
+      Mod+Y { spawn "${terminal}" "-e" "yazi"; }
 
 
       // === Dynamic Cast ===
