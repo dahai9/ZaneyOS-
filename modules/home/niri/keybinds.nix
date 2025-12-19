@@ -294,7 +294,7 @@ in
       Mod+E { spawn "thunar"; }
       Ctrl+Mod+V { spawn "virt-manager"; }
       Ctrl+Mod+E { spawn "emopicker9000"; }
-      Mod+Y { spawn "yazi"; }
+      Mod+Y { spawn "${terminal} -e yazi"; }
 
 
       // === Dynamic Cast ===

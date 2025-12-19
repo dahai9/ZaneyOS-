@@ -59,6 +59,7 @@ in {
       ./zen-browser.nix
       ./zoxide.nix
       ./zsh
+      ./mpv.nix
     ]
     ++ [
       ./hyprland
