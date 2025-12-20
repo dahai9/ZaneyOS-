@@ -1,17 +1,27 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   hardware = {
     sane = {
       enable = true;
-      extraBackends = [pkgs.sane-airscan];
-      disabledDefaultBackends = ["escl"];
+      extraBackends = [ pkgs.sane-airscan ];
+      disabledDefaultBackends = [ "escl" ];
     };
     logitech.wireless.enable = false;
     logitech.wireless.enableGraphical = false;
     graphics.enable = true;
     enableRedistributableFirmware = true;
     keyboard.qmk.enable = true;
-    bluetooth.enable = true;
-    bluetooth.powerOnBoot = true;
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+      settings = {
+        General = {
+          FastConnectable = true;
+          #Enable = "Source,Sink,Media,Socket";
+          Experimental = true;
+        };
+      };
+    };
   };
   local.hardware-clock.enable = false;
 }
