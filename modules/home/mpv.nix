@@ -32,7 +32,8 @@
 
       # 缓存大小上限：400MiB（接近你说的 400M）
       demuxer-max-bytes = "400MiB";
-
+      
+      save-position-on-quit = true;
       # （可选但推荐）限制“回看缓冲”（已播放内容）也不超过 400MiB，
       # 否则 mpv 可能把“已播内容”也保留到较大的上限，占用更多内存。
       # demuxer-max-back-bytes = "400MiB";
