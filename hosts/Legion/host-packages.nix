@@ -12,7 +12,10 @@
       gparted
       telegram-desktop
       rclone
+
+      # develop
       gcc
+      uv
       inetutils # for telnet
     ])
     ++ (with unstable-pkgs; [
