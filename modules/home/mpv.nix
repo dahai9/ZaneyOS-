@@ -19,6 +19,9 @@
       "MBTN_FORWARD" = "add speed 0.15";
       "MBTN_BACK" = "set speed 1.0";
 
+      "UP"   = "add volume 2";
+      "DOWN" = "add volume -2";
+
       # 鼠标中键：1.5x
       "MBTN_MID" = "set speed 1.5";
     };
@@ -26,7 +29,7 @@
     config = {
       # 开启缓存（在 mpv 的缓存体系里通常与 demuxer 缓存配合使用）
       cache = true;
-
+      autofit="65%x65%";
       # 缓存最多“提前缓存”多少秒：这里 3600s = 1 小时
       cache-secs = 3600;
 
