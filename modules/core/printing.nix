@@ -1,11 +1,14 @@
-{host, ...}: let
+{ host, pkgs, ... }:
+let
   inherit (import ../../hosts/${host}/variables.nix) printEnable;
-in {
+in
+{
   services = {
     printing = {
       enable = printEnable;
       drivers = [
         # pkgs.hplipWithPlugin
+        pkgs.brlaser #brother printer
       ];
     };
     avahi = {

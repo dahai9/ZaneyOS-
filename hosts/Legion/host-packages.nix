@@ -17,6 +17,7 @@
       gcc
       uv
       inetutils # for telnet
+      wpsoffice-cn
     ])
     ++ (with unstable-pkgs; [
       vscode
