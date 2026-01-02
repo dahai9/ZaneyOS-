@@ -22,6 +22,10 @@
     if builtins.pathExists hostKeybindsPath
     then import hostKeybindsPath {inherit host;}
     else "";
+  noctaliaTheme = 
+    if barChoice =="noctalia"
+    then ''include "noctalia.kdl"''
+    else "";
 
   # Import keybinds and window rules
   keybindsModule = import ./keybinds.nix {
@@ -88,6 +92,8 @@ in {
     ${hostWindowRules}
 
     ${startupModule}
+
+    ${noctaliaTheme}
 
     environment {
       XDG_CURRENT_DESKTOP "niri"

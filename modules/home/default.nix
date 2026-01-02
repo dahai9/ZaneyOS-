@@ -49,7 +49,7 @@ in {
       ./scripts/gemini-cli.nix
       ./stylix.nix
       ./swappy.nix
-      ./swaync.nix
+      # ./swaync.nix
       ./tealdeer.nix
       ./virtmanager.nix
       barModule
@@ -69,6 +69,11 @@ in {
       if helixEnable
       then [./editors/evil-helix.nix]
       else []
+    )
+    ++(
+      if barChoice !="noctalia"
+      then [./swaync.nix]
+      else[]
     )
     ++ (
       if vscodeEnable
