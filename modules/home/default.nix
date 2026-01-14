@@ -12,6 +12,7 @@
     helixEnable
     doomEmacsEnable
     antigravityEnable
+    browser
     ;
   # Select bar module based on barChoice
   barModule =

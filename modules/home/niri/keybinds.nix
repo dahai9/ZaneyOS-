@@ -250,7 +250,7 @@ in
       Mod+R { switch-preset-column-width; }
       Mod+Shift+R { switch-preset-window-height; }
       Mod+Ctrl+R { reset-window-height; }
-      Mod+M{ expand-column-to-available-width; }
+      Mod+M{ maximize-window-to-edges; }
       Mod+N { center-column; }
 
       // === Manual Sizing ===
@@ -290,7 +290,7 @@ in
       // Mod+D { spawn "vesktop"; }
       // Mod+S { spawn "steam"; }
       Mod+Shift+O { spawn "obs"; }
-      Mod+E { spawn "thunar"; }
+      Mod+E { spawn "nautilus"; }
       Ctrl+Mod+V { spawn "virt-manager"; }
       Ctrl+Mod+E { spawn "emopicker9000"; }
       Mod+Y { spawn "${terminal}" "-e" "yazi"; }

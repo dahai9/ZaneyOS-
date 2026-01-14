@@ -48,7 +48,7 @@
   # This does NOT install your browser
   # You need to install it by adding it to the `packages.nix`
   # or as a flatpak
-  browser = "firefox";
+  browser = "zen";
 
   # Available Options:
   # Kitty, ghostty, wezterm, aalacrity
@@ -73,7 +73,7 @@
 
   # Enable Thunar GUI File Manager
   # Yazi is default File Manager
-  thunarEnable = true;
+  thunarEnable = false;
 
   # Themes, waybar and animation.
   #  Only uncomment your selection

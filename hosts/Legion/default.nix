@@ -4,5 +4,6 @@
     ./host-packages.nix
     ./overlays.nix
     # ./udev.nix
+    ./services.nix
   ];
 }

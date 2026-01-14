@@ -6,17 +6,19 @@
       # discord
       kdePackages.okular
       nodejs
-      firefox
+      # firefox
       mission-center
       termius
       gparted
       telegram-desktop
       rclone
-
+      #file manager
+      nautilus
       # develop
       gcc
       uv
       inetutils # for telnet
+      minicom
       wpsoffice-cn
     ])
     ++ (with unstable-pkgs; [
