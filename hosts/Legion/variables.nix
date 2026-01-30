@@ -20,7 +20,7 @@
   # which will become read-only, so you won’t be able to save settings changes directly 
   # from within VS Code.
   vscodeEnable = false; # this is using homemanager to manage vscode 
-  antigravityEnable = false; # Google port of vscodium
+  antigravityEnable = true; # Google port of vscodium
   # Note: This is evil-helix with VIM keybindings by default
   helixEnable = false;
   #To install: Enable here, zcli rebuild, then run zcli doom install

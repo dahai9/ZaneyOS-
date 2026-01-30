@@ -6,7 +6,7 @@
       # discord
       kdePackages.okular
       nodejs
-      # firefox
+      firefox
       mission-center
       termius
       gparted
@@ -20,6 +20,7 @@
       inetutils # for telnet
       minicom
       wpsoffice-cn
+      mold
     ])
     ++ (with unstable-pkgs; [
       vscode
