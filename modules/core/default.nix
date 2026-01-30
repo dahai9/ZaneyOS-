@@ -35,6 +35,7 @@ in {
     ./virtualisation.nix
     ./xserver.nix
     ./cachix.nix
+    ./zram.nix
     inputs.stylix.nixosModules.stylix
   ];
 }
