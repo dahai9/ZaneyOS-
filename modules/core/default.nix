@@ -36,6 +36,7 @@ in {
     ./xserver.nix
     ./cachix.nix
     ./zram.nix
+    ./direnv.nix
     inputs.stylix.nixosModules.stylix
   ];
 }

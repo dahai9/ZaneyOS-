@@ -15,6 +15,10 @@
       #file manager
       nautilus
       # develop
+      openssl # required by openssl-sys a rust crate
+      openssl.dev # required by openssl-sys a rust crate
+      direnv
+      nix-direnv
       gcc
       uv
       inetutils # for telnet
