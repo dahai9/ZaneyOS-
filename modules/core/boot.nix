@@ -2,10 +2,16 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   boot = {
     kernelPackages = pkgs.linuxPackages;
-    kernelModules = ["v4l2loopback"];
+    kernelModules = [ "v4l2loopback" ];
+
+    kernel.sysctl = {
+      "net.ipv4.tcp_congestion_control" = "bbr";
+      "net.core.default_qdisc" = "fq";
+    };
 
     # kernelParams = [
     #   "amdgpu.backlight=0"
@@ -13,8 +19,10 @@
     # "NVreg_EnableBacklightHandler=0"
     # ];
 
-    extraModulePackages = [config.boot.kernelPackages.v4l2loopback];
-    kernel.sysctl = {"vm.max_map_count" = 2147483642;};
+    extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
+    kernel.sysctl = {
+      "vm.max_map_count" = 2147483642;
+    };
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
     # Appimage Support
