@@ -77,6 +77,7 @@
       webui = pkgs.metacubexd;
     };
     usbmuxd.enable = true; # iPhone support
+    ollama.enable = true; # Ollama LLM Manager
   };
   users.users.usbmux.extraGroups = [ "docker" ];
   systemd.services.mihomo = {

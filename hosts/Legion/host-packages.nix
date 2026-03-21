@@ -6,11 +6,9 @@
       # discord
       kdePackages.okular
       nodejs
-      firefox
       mission-center
       termius
       gparted
-      telegram-desktop
       rclone
       #file manager
       nautilus
@@ -25,13 +23,18 @@
       minicom
       wpsoffice-cn
       mold
+      gh
     ])
     ++ (with unstable-pkgs; [
       vscode
       qq
       wechat
+      telegram-desktop
       # rust toolchain
       rustup
+      firefox
+      gemini-cli-bin
+      opencode
     ]);
 
 }

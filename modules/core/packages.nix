@@ -63,8 +63,8 @@ in {
       ffmpeg # Terminal Video / Audio Editing
       file-roller # Archive Manager
       gedit # Simple Graphical Text Editor
-      gemini-cli # CLI AI client ONLY (optional)
-      gimp # Great Photo Editor
+      # gemini-cli # CLI AI client ONLY (optional)
+      # gimp # Great Photo Editor
       gpu-screen-recorder # needed for nnoctalia-shell
       power-profiles-daemon # needed for noctalia-shell power cycle
       mesa-demos # needed for inxi diag util
