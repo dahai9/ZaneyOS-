@@ -17,7 +17,7 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    
     # Checking nixvim to see if it's better
     nixvim = {
       url = "github:nix-community/nixvim/nixos-25.11";
@@ -29,7 +29,8 @@
       url = "github:jacopone/antigravity-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    # OpenAI Codex (AI assistant)
+    codex-cli-nix.url = "github:sadjow/codex-cli-nix";
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake/beta";
       inputs.nixpkgs.follows = "nixpkgs";

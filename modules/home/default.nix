@@ -33,6 +33,7 @@ in {
       ./emoji.nix
       ./eza.nix
       ./fastfetch
+      ./cli/ai-tools.nix
       ./cli/fzf.nix
       ./cli/gh.nix
       ./cli/git.nix
@@ -71,10 +72,10 @@ in {
       then [./editors/evil-helix.nix]
       else []
     )
-    ++(
-      if barChoice !="noctalia"
+    ++ (
+      if barChoice != "noctalia"
       then [./swaync.nix]
-      else[]
+      else []
     )
     ++ (
       if vscodeEnable

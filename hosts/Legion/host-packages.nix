@@ -1,5 +1,8 @@
-{ pkgs, unstable-pkgs, ... }:
 {
+  pkgs,
+  unstable-pkgs,
+  ...
+}: {
   environment.systemPackages =
     (with pkgs; [
       # audacity
@@ -33,8 +36,5 @@
       # rust toolchain
       rustup
       firefox
-      gemini-cli-bin
-      opencode
     ]);
-
 }

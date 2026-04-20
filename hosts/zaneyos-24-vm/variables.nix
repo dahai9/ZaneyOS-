@@ -18,6 +18,9 @@
   antigravityEnable = true; # Google port of vscodium
   # Note: This is evil-helix with VIM keybindings by default
   helixEnable = true;
+  codexEnable = false;
+  geminiCliEnable = false;
+  opencodeEnable = false;
   #To install: Enable here, zcli rebuild, then run zcli doom install
   doomEmacsEnable = true;
 
