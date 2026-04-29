@@ -19,8 +19,9 @@ Common commands
   - sudo nixos-rebuild boot --flake .#<profile>
 |- Direct NixOS (without nh/zcli)
   - sudo nixos-rebuild switch --flake .#<profile>
-|- Validate the flake
-  - nix flake check
+|- Validate the active profile
+  - nix build .#nixosConfigurations.amd-hybrid.config.system.build.toplevel
+  - Use `nix flake check` only when you expect every exported configuration to evaluate cleanly.
 |- Format Nix files (nixfmt-rfc-style is included)
   - find . -name "*.nix" -print0 | xargs -0 nixfmt
 |- Configuration comparison (compare against upstream)
@@ -71,7 +72,7 @@ High-level architecture (big picture)
 
 Key development choices
 - Repo location matters: nh and zcli assume ~/zaneyos; move it and adjust modules/core/nh.nix.
-- Validation is via nix flake check; there is no separate unit test suite.
+- Validation is via targeted `nix build` for the active profile; there is no separate unit test suite. Use `nix flake check` only when all exported configurations are expected to pass.
 - Formatting is via nixfmt-rfc-style (provided in system packages).
 
 Useful docs in-repo
@@ -79,5 +80,4 @@ Useful docs in-repo
 - zcli.md: full CLI docs, commands, options, and examples.
 - cheatsheets/project-guide.md: quick commands, architecture summary, and common workflows.
 - cheatsheets/: Hyprland and terminal/editor quick references.
-
 

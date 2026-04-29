@@ -15,8 +15,9 @@ Quick commands
   - or: sudo nixos-rebuild boot --flake .#<profile>
 - Direct NixOS (if you prefer without nh/zcli)
   - sudo nixos-rebuild switch --flake .#<profile>
-- Validate the flake
-  - nix flake check
+- Validate the active profile
+  - nix build .#nixosConfigurations.amd-hybrid.config.system.build.toplevel
+  - Use `nix flake check` only when every exported configuration is expected to pass
 - Format Nix files (nixfmt-rfc-style is included)
   - find . -name "*.nix" -print0 | xargs -0 nixfmt
 - Host management
@@ -82,7 +83,7 @@ Common workflows
 - GPU/VM switch: choose nixos-rebuild/nh profile (e.g., nh os switch --hostname vm) and optionally update host/profile constants with zcli update-host
 
 Validation and troubleshooting
-- nix flake check for a quick sanity test
+- targeted `nix build` for the active profile; use `nix flake check` only when all exported configurations are expected to pass
 - zcli diag to produce a detailed hardware/system report
 - If the repo is not under ~/zaneyos, update modules/core/nh.nix so zcli/nh operate on the correct path
 
@@ -90,4 +91,3 @@ Documentation pointers
 - README.md: requirements, first-time install methods, upgrade overview
 - zcli.md: full CLI documentation, commands, options, and examples
 - cheatsheets/: quick-reference guides for Hyprland, terminals, editors, etc.
-
