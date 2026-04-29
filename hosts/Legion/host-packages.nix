@@ -3,17 +3,6 @@
   unstable-pkgs,
   ...
 }: let
-  # On AMD+NVIDIA hybrid, Qt's EGL picks up NVIDIA's driver which lacks
-  # EGL_WL_bind_wayland_display, causing Telegram to segfault on Wayland.
-  # Wrap Telegram to force Mesa EGL on the AMD iGPU.
-  telegram-desktop-wrapped = pkgs.writeShellScriptBin "Telegram" ''
-    export __GLX_VENDOR_LIBRARY_NAME=mesa
-    export LIBGL_ALWAYS_SOFTWARE=0
-    export MESA_LOADER_DRIVER_OVERRIDE=radeonsi
-    export __NV_PRIME_RENDER_OFFLOAD=0
-    export __VK_LAYER_NV_optimus=non_NVIDIA_only
-    exec ${unstable-pkgs.telegram-desktop}/bin/telegram-desktop "$@"
-  '';
 in {
   environment.systemPackages =
     (with pkgs; [
@@ -40,6 +29,7 @@ in {
       mold
       gh
       icu
+      telegram-desktop
     ])
     ++ (with unstable-pkgs; [
       vscode
@@ -49,8 +39,5 @@ in {
       rustup
       firefox
       google-chrome
-    ])
-    ++ [
-      telegram-desktop-wrapped
-    ];
+    ]);
 }
