@@ -27,6 +27,7 @@
       wpsoffice-cn
       mold
       gh
+      icu
     ])
     ++ (with unstable-pkgs; [
       vscode
@@ -36,5 +37,6 @@
       # rust toolchain
       rustup
       firefox
+      google-chrome
     ]);
 }
