@@ -6,6 +6,7 @@
 }: let
   vars = import ../../../hosts/${host}/variables.nix;
   codexEnable = vars.codexEnable or false;
+  claudeCodeEnable = vars.claudeCodeEnable or false;
   geminiCliEnable = vars.geminiCliEnable or false;
   opencodeEnable = vars.opencodeEnable or false;
 in {
@@ -13,6 +14,11 @@ in {
     (
       if codexEnable
       then [pkgs.codex]
+      else []
+    )
+    ++ (
+      if claudeCodeEnable
+      then [pkgs.claude-code]
       else []
     )
     ++ (

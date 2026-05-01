@@ -24,6 +24,7 @@
   # Note: This is evil-helix with VIM keybindings by default
   helixEnable = false;
   codexEnable = true;
+  claudeCodeEnable = true;
   geminiCliEnable = true;
   opencodeEnable = true;
   #To install: Enable here, zcli rebuild, then run zcli doom install

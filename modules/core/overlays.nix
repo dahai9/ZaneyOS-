@@ -7,6 +7,7 @@
     # Provide pkgs.google-antigravity via antigravity-nix overlay
     inputs.antigravity-nix.overlays.default
     inputs.codex-cli-nix.overlays.default
+    inputs.claude-code-nix.overlays.default
     (final: prev: let
       REAL = "${prev.brightnessctl}/bin/brightnessctl";
       wrapped = final.writeShellScriptBin "brightnessctl" ''
