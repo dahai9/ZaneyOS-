@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   programs = {
     # Zsh configuration
     zsh = {
@@ -7,7 +6,7 @@
       enableCompletion = true;
       ohMyZsh = {
         enable = true;
-        plugins = [ "git" ];
+        plugins = ["git"];
         theme = "spaceship";
         customPkgs = [
           pkgs.spaceship-prompt
@@ -19,11 +18,11 @@
 
       promptInit = ''
         # fastfetch -c $HOME/.config/fastfetch/config-compact.jsonc
-        #set spaceship ,the sysmbol is nix logo need jetbrain font 
+        #set spaceship ,the sysmbol is nix logo need jetbrain font
         SPACESHIP_ASYNC_SYMBOL="󱄅"
         SPACESHIP_DIR_TRUNC=0
         #pokemon colorscripts like. Make sure to install krabby package
-        #krabby random --no-mega --no-gmax --no-regional --no-title -s; 
+        #krabby random --no-mega --no-gmax --no-regional --no-title -s;
 
         # Set-up icons for files/folders in terminal using lsd
         # alias ls='lsd'
@@ -54,4 +53,7 @@
   environment.shells = [
     pkgs.zsh
   ];
+  environment.shellAliases = {
+    rm = "trash-put";
+  };
 }

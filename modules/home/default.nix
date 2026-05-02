@@ -51,6 +51,7 @@ in {
       ./scripts/gemini-cli.nix
       ./stylix.nix
       ./swappy.nix
+      ./trash.nix
       # ./swaync.nix
       ./tealdeer.nix
       ./virtmanager.nix
