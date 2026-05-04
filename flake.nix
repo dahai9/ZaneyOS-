@@ -30,9 +30,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # OpenAI Codex (AI assistant)
-    codex-cli-nix.url = "github:sadjow/codex-cli-nix";
+    codex-cli-nix= {
+      url = "github:sadjow/codex-cli-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # Anthropic Claude Code (AI assistant)
-    claude-code-nix.url = "github:sadjow/claude-code-nix";
+    claude-code-nix= {
+      url = "github:sadjow/claude-code-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake/beta";
       inputs.nixpkgs.follows = "nixpkgs";
