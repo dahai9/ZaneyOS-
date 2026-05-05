@@ -74,6 +74,7 @@ in {
       inxi # CLI System Information Tool
       killall # For Killing All Instances Of Programs
       libnotify # For Notifications
+      libseccomp # Seccomp library for syscall filtering
       lm_sensors # Used For Getting Hardware Temps
       lolcat # Add Colors To Your Terminal Command Output
       lshw # Detailed Hardware Information

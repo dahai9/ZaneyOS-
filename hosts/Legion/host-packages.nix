@@ -30,6 +30,7 @@ in {
       gh
       icu
       telegram-desktop
+      cc-switch
     ])
     ++ (with unstable-pkgs; [
       vscode
