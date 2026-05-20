@@ -163,7 +163,7 @@
           cssls.enable = true;
           clangd.enable = true;
           zls.enable = true;
-          marksman.enable = true;
+          marksman.enable = false;
           hyprls.enable = true;
           # hyprls is optional; keep tools available via extraPackages
         };
@@ -334,7 +334,6 @@
       pyright
       lua-language-server
       zls
-      marksman
       clang-tools
       prettierd
       stylua
