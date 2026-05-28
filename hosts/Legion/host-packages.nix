@@ -30,6 +30,9 @@ in {
       gh
       icu
       telegram-desktop
+      zip
+      file
+      jq
       cc-switch
     ])
     ++ (with unstable-pkgs; [
@@ -40,5 +43,7 @@ in {
       rustup
       firefox
       google-chrome
+      rustdesk
+
     ]);
 }
