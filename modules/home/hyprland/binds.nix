@@ -74,10 +74,9 @@ in {
         # ============= WINDOW MANAGEMENT =============
         "$modifier,Q, Kill Active Window, killactive,"
         "$modifier,P, Pseudo Tile, pseudo,"
-        "$modifier SHIFT,I, Toggle Split, togglesplit,"
-        "$modifier,F, Maximize, fullscreen,"
+        "$modifier SHIFT,I, Toggle Split, layoutmsg, togglesplit"
+        "$modifier,F, Maximize, fullscreen, 1"
         "$modifier SHIFT,F, Toggle Floating, togglefloating,"
-        "$modifier ALT,F, Float All Windows, workspaceopt, allfloat"
         "$modifier SHIFT,C, Exit/Logout of Hyprland, exit,"
         # ============= WINDOW MOVEMENT (ARROW KEYS) =============
         "$modifier SHIFT,left, Move Left, movewindow, l"

@@ -22,8 +22,8 @@
     if builtins.pathExists hostKeybindsPath
     then import hostKeybindsPath {inherit host;}
     else "";
-  noctaliaTheme = 
-    if barChoice =="noctalia"
+  noctaliaTheme =
+    if barChoice == "noctalia"
     then ''include "noctalia.kdl"''
     else "";
 
@@ -68,7 +68,7 @@ in {
     niri
     udiskie
     xwayland-satellite
-    swww
+    awww
     grim
     slurp
     wl-clipboard

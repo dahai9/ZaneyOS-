@@ -1,8 +1,27 @@
-{host, ...}: let
+{
+  host,
+  lib,
+  ...
+}: let
   inherit
     (import ../../../hosts/${host}/variables.nix)
     extraMonitorSettings
     ;
+  mkRule = action: matchers: "${action}, ${lib.concatStringsSep ", " matchers}";
+  byClass = regex: "match:class ${regex}";
+  byTitle = regex: "match:title ${regex}";
+  byInitialTitle = regex: "match:initial_title ${regex}";
+  byTag = tag: "match:tag ${tag}";
+  byFullscreen = enabled: "match:fullscreen ${
+    if enabled
+    then "1"
+    else "0"
+  }";
+  byXwayland = enabled: "match:xwayland ${
+    if enabled
+    then "1"
+    else "0"
+  }";
 in {
   wayland.windowManager.hyprland = {
     settings = {
@@ -10,80 +29,98 @@ in {
         #"noblur, xwayland:1" # Helps prevent odd borders/shadows for xwayland apps
         # downside it can impact other xwayland apps
         # This rule is a template for a more targeted approach
-        "noblur, class:^(\bresolve\b)$, xwayland:1" # Window rule for just resolve
-        "tag +file-manager, class:^([Tt]hunar|org.gnome.Nautilus|[Pp]cmanfm-qt)$"
-        "tag +terminal, class:^(com.mitchellh.ghostty|org.wezfurlong.wezterm|Alacritty|kitty|kitty-dropterm)$"
-        "tag +browser, class:^(Brave-browser(-beta|-dev|-unstable)?)$"
-        "tag +browser, class:^([Ff]irefox|org.mozilla.firefox|[Ff]irefox-esr)$"
-        "tag +browser, class:^([Gg]oogle-chrome(-beta|-dev|-unstable)?)$"
-        "tag +browser, class:^([Tt]horium-browser|[Cc]achy-browser)$"
-        "tag +projects, class:^(codium|codium-url-handler|VSCodium)$"
-        "tag +projects, class:^(VSCode|code-url-handler)$"
-        "tag +im, class:^([Dd]iscord|[Ww]ebCord|[Vv]esktop)$"
-        "tag +im, class:^([Ff]erdium)$"
-        "tag +im, class:^([Ww]hatsapp-for-linux)$"
-        "tag +im, class:^(org.telegram.desktop|io.github.tdesktop_x64.TDesktop)$"
-        "tag +im, class:^(teams-for-linux)$"
-        "tag +games, class:^(gamescope)$"
-        "tag +games, class:^(steam_app_\d+)$"
-        "tag +gamestore, class:^([Ss]team)$"
-        "tag +gamestore, title:^([Ll]utris)$"
-        "tag +gamestore, class:^(com.heroicgameslauncher.hgl)$"
-        "tag +settings, class:^(gnome-disks|wihotspot(-gui)?)$"
-        "tag +settings, class:^([Rr]ofi)$"
-        "tag +settings, class:^(file-roller|org.gnome.FileRoller)$"
-        "tag +settings, class:^(nm-applet|nm-connection-editor|blueman-manager)$"
-        "tag +settings, class:^(pavucontrol|org.pulseaudio.pavucontrol|com.saivert.pwvucontrol)$"
-        "tag +settings, class:^(nwg-look|qt5ct|qt6ct|[Yy]ad)$"
-        "tag +settings, class:(xdg-desktop-portal-gtk)"
-        "tag +settings, class:(.blueman-manager-wrapped)"
-        "tag +settings, class:(nwg-displays)"
-        "move 72% 7%,title:^(Picture-in-Picture)$"
+        (mkRule "no_blur on" [
+          (byClass "^resolve$")
+          (byXwayland true)
+        ]) # Window rule for just resolve
+        (mkRule "tag +file-manager" [(byClass "^([Tt]hunar|org.gnome.Nautilus|[Pp]cmanfm-qt)$")])
+        (mkRule "tag +terminal" [(byClass "^(com.mitchellh.ghostty|org.wezfurlong.wezterm|Alacritty|kitty|kitty-dropterm)$")])
+        (mkRule "tag +browser" [(byClass "^(Brave-browser(-beta|-dev|-unstable)?)$")])
+        (mkRule "tag +browser" [(byClass "^([Ff]irefox|org.mozilla.firefox|[Ff]irefox-esr)$")])
+        (mkRule "tag +browser" [(byClass "^([Gg]oogle-chrome(-beta|-dev|-unstable)?)$")])
+        (mkRule "tag +browser" [(byClass "^([Tt]horium-browser|[Cc]achy-browser)$")])
+        (mkRule "tag +projects" [(byClass "^(codium|codium-url-handler|VSCodium)$")])
+        (mkRule "tag +projects" [(byClass "^(VSCode|code-url-handler)$")])
+        (mkRule "tag +im" [(byClass "^([Dd]iscord|[Ww]ebCord|[Vv]esktop)$")])
+        (mkRule "tag +im" [(byClass "^([Ff]erdium)$")])
+        (mkRule "tag +im" [(byClass "^([Ww]hatsapp-for-linux)$")])
+        (mkRule "tag +im" [(byClass "^(org.telegram.desktop|io.github.tdesktop_x64.TDesktop)$")])
+        (mkRule "tag +im" [(byClass "^(teams-for-linux)$")])
+        (mkRule "tag +games" [(byClass "^(gamescope)$")])
+        (mkRule "tag +games" [(byClass "^(steam_app_[0-9]+)$")])
+        (mkRule "tag +gamestore" [(byClass "^([Ss]team)$")])
+        (mkRule "tag +gamestore" [(byTitle "^([Ll]utris)$")])
+        (mkRule "tag +gamestore" [(byClass "^(com.heroicgameslauncher.hgl)$")])
+        (mkRule "tag +settings" [(byClass "^(gnome-disks|wihotspot(-gui)?)$")])
+        (mkRule "tag +settings" [(byClass "^([Rr]ofi)$")])
+        (mkRule "tag +settings" [(byClass "^(file-roller|org.gnome.FileRoller)$")])
+        (mkRule "tag +settings" [(byClass "^(nm-applet|nm-connection-editor|blueman-manager)$")])
+        (mkRule "tag +settings" [(byClass "^(pavucontrol|org.pulseaudio.pavucontrol|com.saivert.pwvucontrol)$")])
+        (mkRule "tag +settings" [(byClass "^(nwg-look|qt5ct|qt6ct|[Yy]ad)$")])
+        (mkRule "tag +settings" [(byClass "^(xdg-desktop-portal-gtk)$")])
+        (mkRule "tag +settings" [(byClass "^.blueman-manager-wrapped$")])
+        (mkRule "tag +settings" [(byClass "^(nwg-displays)$")])
+        (mkRule "move 72% 7%" [(byTitle "^(Picture-in-Picture)$")])
         # qs-keybinds floating viewer
-        "float, title:^(Hyprland Keybinds|Emacs Leader Keybinds|Kitty Configuration|WezTerm Configuration|Ghostty Configuration|Yazi Configuration)$"
-        "center, title:^(Hyprland Keybinds|Emacs Leader Keybinds|Kitty Configuration|WezTerm Configuration|Ghostty Configuration|Yazi Configuration)$"
-        "size 55% 66%, title:^(Hyprland Keybinds|Emacs Leader Keybinds|Kitty Configuration|WezTerm Configuration|Ghostty Configuration|Yazi Configuration)$"
+        (mkRule "float on" [(byTitle "^(Hyprland Keybinds|Emacs Leader Keybinds|Kitty Configuration|WezTerm Configuration|Ghostty Configuration|Yazi Configuration)$")])
+        (mkRule "center on" [(byTitle "^(Hyprland Keybinds|Emacs Leader Keybinds|Kitty Configuration|WezTerm Configuration|Ghostty Configuration|Yazi Configuration)$")])
+        (mkRule "size 55% 66%" [(byTitle "^(Hyprland Keybinds|Emacs Leader Keybinds|Kitty Configuration|WezTerm Configuration|Ghostty Configuration|Yazi Configuration)$")])
         # qs-cheatsheets floating viewer
-        "float, title:^(Cheatsheets Viewer)$"
-        "center, title:^(Cheatsheets Viewer)$"
-        "size 65% 60%, title:^(Cheatsheets Viewer)$"
-        "center, class:^([Ff]erdium)$"
-        "float, class:^([Ww]aypaper)$"
-        "center, class:^(pavucontrol|org.pulseaudio.pavucontrol|com.saivert.pwvucontrol)$"
-        "center, class:([Tt]hunar), title:negative:(.*[Tt]hunar.*)"
-        "center, title:^(Authentication Required)$"
-        "idleinhibit fullscreen, class:^(*)$"
-        "idleinhibit fullscreen, title:^(*)$"
-        "idleinhibit fullscreen, fullscreen:1"
-        "float, tag:settings*"
-        "float, class:^([Ff]erdium)$"
-        "float, title:^(Picture-in-Picture)$"
-        "float, class:^(mpv|com.github.rafostar.Clapper)$"
-        "float, title:^(Authentication Required)$"
-        "float, class:(codium|codium-url-handler|VSCodium), title:negative:(.*codium.*|.*VSCodium.*)"
-        "float, class:^(com.heroicgameslauncher.hgl)$, title:negative:(Heroic Games Launcher)"
-        "float, class:^([Ss]team)$, title:negative:^([Ss]team)$"
-        "float, class:([Tt]hunar), title:negative:(.*[Tt]hunar.*)"
-        "float, initialTitle:(Add Folder to Workspace)"
-        "float, initialTitle:(Open Files)"
-        "float, initialTitle:(wants to save)"
-        "size 70% 60%, initialTitle:(Open Files)"
-        "size 70% 60%, initialTitle:(Add Folder to Workspace)"
-        "size 70% 70%, tag:settings*"
-        "size 60% 70%, class:^([Ff]erdium)$"
-        "opacity 1.0 1.0, tag:browser*"
-        "opacity 0.9 0.8, tag:projects*"
-        "opacity 0.94 0.86, tag:im*"
-        "opacity 0.9 0.8, tag:file-manager*"
-        "opacity 0.8 0.7, tag:terminal*"
-        "opacity 0.8 0.7, tag:settings*"
-        "opacity 0.8 0.7, class:^(gedit|org.gnome.TextEditor|mousepad)$"
-        "opacity 0.9 0.8, class:^(seahorse)$ # gnome-keyring gui"
-        "opacity 0.95 0.75, title:^(Picture-in-Picture)$"
-        "pin, title:^(Picture-in-Picture)$"
-        "keepaspectratio, title:^(Picture-in-Picture)$"
-        "noblur, tag:games*"
-        "fullscreen, tag:games*"
+        (mkRule "float on" [(byTitle "^(Cheatsheets Viewer)$")])
+        (mkRule "center on" [(byTitle "^(Cheatsheets Viewer)$")])
+        (mkRule "size 65% 60%" [(byTitle "^(Cheatsheets Viewer)$")])
+        (mkRule "center on" [(byClass "^([Ff]erdium)$")])
+        (mkRule "float on" [(byClass "^([Ww]aypaper)$")])
+        (mkRule "center on" [(byClass "^(pavucontrol|org.pulseaudio.pavucontrol|com.saivert.pwvucontrol)$")])
+        (mkRule "center on" [
+          (byClass "([Tt]hunar)")
+          (byTitle "negative:(.*[Tt]hunar.*)")
+        ])
+        (mkRule "center on" [(byTitle "^(Authentication Required)$")])
+        (mkRule "idle_inhibit fullscreen" [(byClass "^.*$")])
+        (mkRule "idle_inhibit fullscreen" [(byTitle "^.*$")])
+        (mkRule "idle_inhibit fullscreen" [(byFullscreen true)])
+        (mkRule "float on" [(byTag "settings*")])
+        (mkRule "float on" [(byClass "^([Ff]erdium)$")])
+        (mkRule "float on" [(byTitle "^(Picture-in-Picture)$")])
+        (mkRule "float on" [(byClass "^(mpv|com.github.rafostar.Clapper)$")])
+        (mkRule "float on" [(byTitle "^(Authentication Required)$")])
+        (mkRule "float on" [
+          (byClass "(codium|codium-url-handler|VSCodium)")
+          (byTitle "negative:(.*codium.*|.*VSCodium.*)")
+        ])
+        (mkRule "float on" [
+          (byClass "^(com.heroicgameslauncher.hgl)$")
+          (byTitle "negative:(Heroic Games Launcher)")
+        ])
+        (mkRule "float on" [
+          (byClass "^([Ss]team)$")
+          (byTitle "negative:^([Ss]team)$")
+        ])
+        (mkRule "float on" [
+          (byClass "([Tt]hunar)")
+          (byTitle "negative:(.*[Tt]hunar.*)")
+        ])
+        (mkRule "float on" [(byInitialTitle "^(Add Folder to Workspace)$")])
+        (mkRule "float on" [(byInitialTitle "^(Open Files)$")])
+        (mkRule "float on" [(byInitialTitle "^(wants to save)$")])
+        (mkRule "size 70% 60%" [(byInitialTitle "^(Open Files)$")])
+        (mkRule "size 70% 60%" [(byInitialTitle "^(Add Folder to Workspace)$")])
+        (mkRule "size 70% 70%" [(byTag "settings*")])
+        (mkRule "size 60% 70%" [(byClass "^([Ff]erdium)$")])
+        (mkRule "opacity 1.0 1.0" [(byTag "browser*")])
+        (mkRule "opacity 0.9 0.8" [(byTag "projects*")])
+        (mkRule "opacity 0.94 0.86" [(byTag "im*")])
+        (mkRule "opacity 0.9 0.8" [(byTag "file-manager*")])
+        (mkRule "opacity 0.8 0.7" [(byTag "terminal*")])
+        (mkRule "opacity 0.8 0.7" [(byTag "settings*")])
+        (mkRule "opacity 0.8 0.7" [(byClass "^(gedit|org.gnome.TextEditor|mousepad)$")])
+        (mkRule "opacity 0.9 0.8" [(byClass "^(seahorse)$")]) # gnome-keyring gui
+        (mkRule "opacity 0.95 0.75" [(byTitle "^(Picture-in-Picture)$")])
+        (mkRule "pin on" [(byTitle "^(Picture-in-Picture)$")])
+        (mkRule "keep_aspect_ratio on" [(byTitle "^(Picture-in-Picture)$")])
+        (mkRule "no_blur on" [(byTag "games*")])
+        (mkRule "fullscreen on" [(byTag "games*")])
       ];
     };
   };

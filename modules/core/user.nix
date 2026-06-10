@@ -31,7 +31,6 @@ in {
     isNormalUser = true;
     description = "${gitUsername}";
     extraGroups = [
-      "adbusers"
       "docker" #access to docker as non-root
       "libvirtd" #Virt manager/QEMU access
       "lp"

@@ -8,6 +8,7 @@ in {
   # Styling Options
   stylix = {
     enable = true;
+    # enableReleaseChecks = false;
     image = stylixImage;
     # base16Scheme = {
     #   base00 = "282936";

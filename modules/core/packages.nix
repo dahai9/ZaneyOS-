@@ -33,7 +33,6 @@ in {
     seahorse.enable = true;
     fuse.userAllowOther = true;
     mtr.enable = true;
-    adb.enable = true;
     hyprlock.enable = true;
     gnupg.agent = {
       enable = true;
@@ -48,6 +47,7 @@ in {
     ++ [
       alejandra # nix formatter
       amfora # Fancy Terminal Browser For Gemini Protocol
+      android-tools # Provides adb; uaccess rules are handled by systemd 258+
       appimage-run # Needed For AppImage Support
       brave # Brave Browser
       brightnessctl # For Screen Brightness Control
@@ -81,7 +81,7 @@ in {
       mdcat # CLI markdown parser
       mpv # Incredible Video Player
       ncdu # Disk Usage Analyzer With Ncurses Interface
-      nixfmt-rfc-style # Nix Formatter
+      nixfmt # Nix Formatter
       nwg-displays # configure monitor configs via GUI
       onefetch # provides zsaneyos build info on current system
       pandoc # format MD to HTML for cheatsheet parser

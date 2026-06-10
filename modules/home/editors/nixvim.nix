@@ -4,15 +4,15 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   # Bring in Nixvim's Home Manager module so programs.nixvim options exist
-  imports = [ inputs.nixvim.homeModules.nixvim ];
+  imports = [inputs.nixvim.homeModules.nixvim];
 
   programs.nixvim = {
     enable = true;
     viAlias = true;
     vimAlias = true;
+    nixpkgs.source = pkgs.path;
 
     globals = {
       mapleader = " ";
@@ -34,7 +34,7 @@
       updatetime = 200;
       cursorline = true;
       spell = true;
-      spelllang = [ "en" ];
+      spelllang = ["en"];
       # Send all yanks/deletes to the system clipboard (Wayland/X11)
       clipboard = "unnamedplus";
     };
@@ -181,16 +181,16 @@
         enable = true;
         settings = {
           formatters_by_ft = {
-            nix = [ "alejandra" ];
-            lua = [ "stylua" ];
-            javascript = [ "prettierd" ];
-            typescript = [ "prettierd" ];
-            javascriptreact = [ "prettierd" ];
-            typescriptreact = [ "prettierd" ];
-            css = [ "prettierd" ];
-            html = [ "prettierd" ];
-            markdown = [ "prettierd" ];
-            sh = [ "shfmt" ];
+            nix = ["alejandra"];
+            lua = ["stylua"];
+            javascript = ["prettierd"];
+            typescript = ["prettierd"];
+            javascriptreact = ["prettierd"];
+            typescriptreact = ["prettierd"];
+            css = ["prettierd"];
+            html = ["prettierd"];
+            markdown = ["prettierd"];
+            sh = ["shfmt"];
           };
           format_on_save = {
             lsp_fallback = true;
@@ -204,26 +204,26 @@
       # Insert-mode escape
       {
         key = "jk";
-        mode = [ "i" ];
+        mode = ["i"];
         action = "<ESC>";
         options.desc = "Exit insert mode";
       }
       {
         key = "<C-c>";
-        mode = [ "v" ];
+        mode = ["v"];
         action = "\"+y";
         options.desc = "copy v mode selected text ";
       }
       # Telescope
       {
         key = "<leader>ff";
-        mode = [ "n" ];
+        mode = ["n"];
         action = "<cmd>Telescope find_files<cr>";
         options.desc = "Search files by name";
       }
       {
         key = "<leader>lg";
-        mode = [ "n" ];
+        mode = ["n"];
         action = "<cmd>Telescope live_grep<cr>";
         options.desc = "Search files by contents";
       }
@@ -231,7 +231,7 @@
       # File tree (Neo-tree)
       {
         key = "<leader>fe";
-        mode = [ "n" ];
+        mode = ["n"];
         action = "<cmd>Neotree toggle<cr>";
         options.desc = "File browser toggle";
       }
@@ -239,7 +239,7 @@
       # Terminal
       {
         key = "<leader>t";
-        mode = [ "n" ];
+        mode = ["n"];
         action = "<cmd>ToggleTerm<CR>";
         options.desc = "Toggle terminal";
       }
@@ -247,13 +247,13 @@
       # Comment line (Doom Emacs style)
       {
         key = "<leader>.";
-        mode = [ "n" ];
+        mode = ["n"];
         action = "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>";
         options.desc = "Comment line";
       }
       {
         key = "<leader>.";
-        mode = [ "v" ];
+        mode = ["v"];
         action = "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>";
         options.desc = "Comment selection";
       }
@@ -261,25 +261,25 @@
       # Diagnostics
       {
         key = "<leader>dj";
-        mode = [ "n" ];
+        mode = ["n"];
         action = "<cmd>lua vim.diagnostic.goto_next()<CR>";
         options.desc = "Go to next diagnostic";
       }
       {
         key = "<leader>dk";
-        mode = [ "n" ];
+        mode = ["n"];
         action = "<cmd>lua vim.diagnostic.goto_prev()<CR>";
         options.desc = "Go to previous diagnostic";
       }
       {
         key = "<leader>dl";
-        mode = [ "n" ];
+        mode = ["n"];
         action = "<cmd>lua vim.diagnostic.open_float()<CR>";
         options.desc = "Show diagnostic details";
       }
       {
         key = "<leader>dt";
-        mode = [ "n" ];
+        mode = ["n"];
         action = "<cmd>Trouble diagnostics toggle<cr>";
         options.desc = "Toggle diagnostics list";
       }
@@ -303,7 +303,7 @@
       # Help mappings
       {
         key = "<leader>h";
-        mode = [ "n" ];
+        mode = ["n"];
         action = ":help<Space>";
         options = {
           desc = "Open :help prompt";
@@ -312,7 +312,7 @@
       }
       {
         key = "<leader>H";
-        mode = [ "n" ];
+        mode = ["n"];
         action = ":help <C-r><C-w><CR>";
         options.desc = "Help for word under cursor";
       }
@@ -328,8 +328,8 @@
       lazygit
       nil
       hyprls
-      nodePackages.typescript-language-server
-      nodePackages.typescript
+      typescript-language-server
+      typescript
       vscode-langservers-extracted
       pyright
       lua-language-server
